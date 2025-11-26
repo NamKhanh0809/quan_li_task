@@ -1,0 +1,128 @@
+/* Import Font chữ Google (Poppins - Rất hiện đại) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --primary-color: #4e73df;
+    --secondary-color: #858796;
+    --success-color: #1cc88a;
+    --danger-color: #e74a3b;
+    --warning-color: #f6c23e;
+    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    color: #5a5c69;
+}
+
+/* --- TÙY CHỈNH CARD (THẺ) --- */
+.card {
+    border: none;
+    border-radius: 15px; /* Bo tròn mạnh hơn */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* Đổ bóng mềm */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: rgba(255, 255, 255, 0.95); /* Hơi trong suốt nhẹ */
+}
+
+/* Hiệu ứng khi di chuột vào card */
+.card:hover {
+    transform: translateY(-5px); /* Nổi lên trên */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* --- TÙY CHỈNH BẢNG (TABLE) --- */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 8px; /* Tách các dòng ra */
+}
+
+.table thead th {
+    border: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--secondary-color);
+    letter-spacing: 1px;
+}
+
+.table tbody tr {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    transition: all 0.2s;
+}
+
+.table tbody tr:hover {
+    transform: scale(1.01); /* Phóng to nhẹ dòng khi di chuột */
+    z-index: 2;
+    position: relative;
+}
+
+.table td {
+    vertical-align: middle;
+    border: none;
+    padding: 15px;
+}
+
+/* Bo tròn đầu và cuối của mỗi dòng bảng */
+.table tbody tr td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+.table tbody tr td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+
+/* --- CÁC CLASS TRẠNG THÁI (Logic AI) --- */
+
+/* Badge trạng thái */
+.badge {
+    padding: 8px 12px;
+    border-radius: 30px;
+    font-weight: 500;
+}
+
+/* Dòng cảnh báo rủi ro (Giai đoạn 3) */
+.risk-row {
+    background-color: #fff3f3 !important; /* Màu nền đỏ nhạt */
+    border-left: 5px solid var(--danger-color) !important;
+}
+
+.risk-row td {
+    color: #b02a37;
+    font-weight: 600;
+}
+
+/* Class ẩn hiện màn hình */
+.hidden {
+    display: none !important;
+}
+
+/* --- FORM INPUT --- */
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #e3e6f0;
+    padding: 10px 15px;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.25);
+    border-color: var(--primary-color);
+}
+
+/* --- BUTTONS --- */
+.btn {
+    border-radius: 10px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
+.btn-success { background-color: var(--success-color); border-color: var(--success-color); }
+.btn-danger { background-color: var(--danger-color); border-color: var(--danger-color); }
+
+/* Animation hiện ra từ từ */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#authScreen, #mainScreen {
+    animation: fadeIn 0.6s ease-out;
+}
