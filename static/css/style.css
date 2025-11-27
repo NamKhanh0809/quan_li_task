@@ -1,128 +1,105 @@
-/* Import Font chữ Google (Poppins - Rất hiện đại) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+<style>
+    /* 1. CẤU HÌNH CHUNG & FONT CHỮ */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-:root {
-    --primary-color: #4e73df;
-    --secondary-color: #858796;
-    --success-color: #1cc88a;
-    --danger-color: #e74a3b;
-    --warning-color: #f6c23e;
-    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
+    :root {
+        --primary-color: #4e73df;
+        --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--bg-gradient);
-    min-height: 100vh;
-    color: #5a5c69;
-}
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: var(--bg-gradient);
+        min-height: 100vh;
+        color: #5a5c69;
+        padding: 1.5rem;
+    }
 
-/* --- TÙY CHỈNH CARD (THẺ) --- */
-.card {
-    border: none;
-    border-radius: 15px; /* Bo tròn mạnh hơn */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* Đổ bóng mềm */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background-color: rgba(255, 255, 255, 0.95); /* Hơi trong suốt nhẹ */
-}
+    /* 2. TÙY CHỈNH CARD (THẺ TASK) */
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background-color: #fff;
+    }
 
-/* Hiệu ứng khi di chuột vào card */
-.card:hover {
-    transform: translateY(-5px); /* Nổi lên trên */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-}
+    /* Hiệu ứng nổi lên khi di chuột */
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        z-index: 10; /* Đưa lên trên cùng */
+    }
 
-/* --- TÙY CHỈNH BẢNG (TABLE) --- */
-.table {
-    border-collapse: separate;
-    border-spacing: 0 8px; /* Tách các dòng ra */
-}
+    /* 3. CÁC TRẠNG THÁI TASK QUAN TRỌNG */
 
-.table thead th {
-    border: none;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    color: var(--secondary-color);
-    letter-spacing: 1px;
-}
+    /* Task Rủi ro (Cảnh báo đỏ) */
+    .risk-alert {
+        border-left: 5px solid #dc3545 !important;
+        background-color: #fff5f5;
+    }
 
-.table tbody tr {
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-    transition: all 0.2s;
-}
+    /* Task Đã xong (Xanh nhạt, mờ đi) */
+    .task-done {
+        opacity: 0.7; /* Mờ đi */
+        background-color: #f0fff4;
+        border-left: 5px solid #198754 !important;
+    }
 
-.table tbody tr:hover {
-    transform: scale(1.01); /* Phóng to nhẹ dòng khi di chuột */
-    z-index: 2;
-    position: relative;
-}
+    /* [MỚI] Task Thất bại/Thu hồi (Xám xịt, chìm xuống) */
+    .task-late {
+        opacity: 0.6; /* Mờ hơn cả task done */
+        background-color: #e2e6ea; /* Xám đậm hơn */
+        border-left: 5px solid #495057 !important; /* Viền xám đen */
+        color: #6c757d; /* Chữ màu xám */
+    }
+    
+    /* Style cho task bị trễ trong kho chung */
+    .late-alert-box {
+        border-left: 5px solid #212529 !important;
+        background-color: #e9ecef;
+    }
 
-.table td {
-    vertical-align: middle;
-    border: none;
-    padding: 15px;
-}
+    /* 4. CÁC THÀNH PHẦN KHÁC */
 
-/* Bo tròn đầu và cuối của mỗi dòng bảng */
-.table tbody tr td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
-.table tbody tr td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+    /* Badge KPI (Góc phải Admin) */
+    .kpi-badge {
+        font-size: 0.9em;
+        min-width: 70px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 
-/* --- CÁC CLASS TRẠNG THÁI (Logic AI) --- */
+    /* Badge Phạt (Màu đỏ nhạt) */
+    .penalty-badge {
+        font-size: 0.85em;
+        color: #b02a37;
+        background-color: #ffe6e6;
+        padding: 3px 8px;
+        border-radius: 6px;
+        border: 1px solid #f1aeb5;
+        font-weight: 600;
+    }
 
-/* Badge trạng thái */
-.badge {
-    padding: 8px 12px;
-    border-radius: 30px;
-    font-weight: 500;
-}
+    /* Thanh cuộn cho Admin */
+    .admin-split-view {
+        height: 80vh;
+        overflow-y: auto;
+        padding-right: 5px;
+    }
+    
+    /* Tùy chỉnh thanh cuộn cho đẹp */
+    .admin-split-view::-webkit-scrollbar { width: 6px; }
+    .admin-split-view::-webkit-scrollbar-track { background: #f1f1f1; }
+    .admin-split-view::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 10px; }
+    .admin-split-view::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
 
-/* Dòng cảnh báo rủi ro (Giai đoạn 3) */
-.risk-row {
-    background-color: #fff3f3 !important; /* Màu nền đỏ nhạt */
-    border-left: 5px solid var(--danger-color) !important;
-}
-
-.risk-row td {
-    color: #b02a37;
-    font-weight: 600;
-}
-
-/* Class ẩn hiện màn hình */
-.hidden {
-    display: none !important;
-}
-
-/* --- FORM INPUT --- */
-.form-control {
-    border-radius: 10px;
-    border: 1px solid #e3e6f0;
-    padding: 10px 15px;
-}
-
-.form-control:focus {
-    box-shadow: 0 0 0 3px rgba(78, 115, 223, 0.25);
-    border-color: var(--primary-color);
-}
-
-/* --- BUTTONS --- */
-.btn {
-    border-radius: 10px;
-    padding: 8px 20px;
-    font-weight: 500;
-    transition: all 0.2s;
-}
-
-.btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
-.btn-success { background-color: var(--success-color); border-color: var(--success-color); }
-.btn-danger { background-color: var(--danger-color); border-color: var(--danger-color); }
-
-/* Animation hiện ra từ từ */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-#authScreen, #mainScreen {
-    animation: fadeIn 0.6s ease-out;
-}
+    /* Accordion (Danh sách nhân viên) */
+    .accordion-button:not(.collapsed) {
+        background-color: #e7f1ff;
+        color: #0d6efd;
+        font-weight: 600;
+        box-shadow: none;
+    }
+    .accordion-item { border: none; margin-bottom: 10px; border-radius: 8px !important; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+</style>
